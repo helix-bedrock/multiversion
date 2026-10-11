@@ -3,10 +3,9 @@ package v1_16_100
 import (
 	"github.com/go-gl/mathgl/mgl32"
 	"github.com/google/uuid"
-	"github.com/helix-bedrock/protocol/nbt"
 	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/nbt"
 	"github.com/helix-bedrock/protocol/packet"
-	"github.com/helix-bedrock/multiversion/internal/packetconv"
 )
 
 func marshalResourcePackClientResponse(io *wireIO, raw packet.Packet) {
@@ -311,34 +310,5 @@ func marshalCorrectPlayerMovePrediction(io *wireIO, raw packet.Packet) {
 		pk.PredictionType = packet.PredictionTypePlayer
 		pk.Rotation = mgl32.Vec2{}
 		pk.VehicleAngularVelocity = protocol.Optional[float32]{}
-	}
-}
-
-func marshalClientBoundDebugRenderer(io *wireIO, raw packet.Packet) {
-	packetconv.LegacyDebugRenderer(io, raw.(*packet.ClientBoundDebugRenderer), io.reading, true)
-}
-
-func marshalAddVolumeEntity(io *wireIO, raw packet.Packet) {
-	pk := raw.(*packet.AddVolumeEntity)
-	runtimeID := uint64(pk.EntityRuntimeID)
-	io.Uint64(&runtimeID)
-	pk.EntityRuntimeID = uint32(runtimeID)
-	io.NBT(&pk.EntityMetadata, nbt.NetworkLittleEndian)
-	io.String(&pk.EngineVersion)
-	if io.reading {
-		pk.EncodingIdentifier = ""
-		pk.InstanceIdentifier = ""
-		pk.Bounds = [2]protocol.BlockPos{}
-		pk.Dimension = packet.DimensionOverworld
-	}
-}
-
-func marshalRemoveVolumeEntity(io *wireIO, raw packet.Packet) {
-	pk := raw.(*packet.RemoveVolumeEntity)
-	runtimeID := uint64(pk.EntityRuntimeID)
-	io.Uint64(&runtimeID)
-	pk.EntityRuntimeID = uint32(runtimeID)
-	if io.reading {
-		pk.Dimension = packet.DimensionOverworld
 	}
 }

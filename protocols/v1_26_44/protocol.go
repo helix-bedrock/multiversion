@@ -3,12 +3,12 @@
 package v1_26_44
 
 import (
-	"github.com/helix-bedrock/protocol/version"
-	"github.com/helix-bedrock/protocol"
-	"github.com/helix-bedrock/protocol/packet"
 	"github.com/helix-bedrock/multiversion/internal/packetconv"
 	"github.com/helix-bedrock/multiversion/mapping"
 	"github.com/helix-bedrock/multiversion/protocols/v1_26_45"
+	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/packet"
+	"github.com/helix-bedrock/protocol/version"
 )
 
 const (

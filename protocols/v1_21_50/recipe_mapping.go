@@ -1,9 +1,9 @@
 package v1_21_50
 
 import (
+	"github.com/helix-bedrock/multiversion/mapping"
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	"github.com/helix-bedrock/multiversion/mapping"
 )
 
 func mapCraftingData(pk *packet.CraftingData, items *mapping.ItemMapper, blocks *mapping.BlockMapper) *packet.CraftingData {

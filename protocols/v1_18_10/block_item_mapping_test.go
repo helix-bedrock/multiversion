@@ -4,10 +4,10 @@ import (
 	"testing"
 
 	"github.com/df-mc/worldupgrader/blockupgrader"
-	"github.com/helix-bedrock/protocol"
-	"github.com/helix-bedrock/protocol/packet"
 	v486data "github.com/helix-bedrock/multiversion/data/v486"
 	"github.com/helix-bedrock/multiversion/mapping"
+	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/packet"
 )
 
 type blockItemTestRegistry struct {

@@ -3,10 +3,10 @@ package v1_26_0
 import (
 	"fmt"
 
-	"github.com/helix-bedrock/protocol"
-	"github.com/helix-bedrock/protocol/packet"
 	v924 "github.com/helix-bedrock/multiversion/data/v924"
 	"github.com/helix-bedrock/multiversion/mapping"
+	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/packet"
 )
 
 const (

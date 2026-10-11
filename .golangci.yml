@@ -38,6 +38,20 @@ linters:
           - gosec
           - unparam
           - forbidigo
+      # Old versions still use packets and fields the latest protocol marks
+      # deprecated; converting them is the point of this repo.
+      - path: protocols/
+        linters: [staticcheck]
+        text: "SA1019"
+      # Each adapter's Protocol methods implement version.Protocol and are
+      # documented there.
+      - path: protocols/
+        linters: [revive]
+        text: 'exported: exported method Protocol.'
+      # Data snapshot tools write repo files and run git on purpose.
+      - path: tools/
+        linters: [gosec]
+        text: "G204|G301|G306"
 
 formatters:
   enable:

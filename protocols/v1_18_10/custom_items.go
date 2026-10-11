@@ -1,8 +1,8 @@
 package v1_18_10
 
 import (
-	"github.com/helix-bedrock/protocol/nbt"
 	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/nbt"
 	"github.com/helix-bedrock/protocol/packet"
 )
 

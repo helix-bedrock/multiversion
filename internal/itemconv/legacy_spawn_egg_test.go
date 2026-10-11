@@ -4,8 +4,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/multiversion/mapping"
+	"github.com/helix-bedrock/protocol"
 )
 
 func TestIronGolemSpawnEggRoundTrip(t *testing.T) {

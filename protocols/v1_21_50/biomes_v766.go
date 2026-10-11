@@ -1,8 +1,8 @@
 package v1_21_50
 
 import (
-	"github.com/helix-bedrock/protocol/packet"
 	v766 "github.com/helix-bedrock/multiversion/data/v766"
+	"github.com/helix-bedrock/protocol/packet"
 )
 
 func marshalBiomeDefinitionList(io *wireIO, _ packet.Packet) {

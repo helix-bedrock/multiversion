@@ -222,14 +222,15 @@ func marshalLevelChunk(io *wireIO, raw packet.Packet) {
 	if io.reading {
 		pk.SubChunkCount = subChunkCount
 	}
-	if subChunkCount == math.MaxUint32-1 {
+	switch {
+	case subChunkCount == math.MaxUint32-1:
 		limit, _ := pk.SubChunkLimit.Value()
 		highest := uint16(limit)
 		io.Uint16(&highest)
 		pk.SubChunkLimit = protocol.Option(int32(highest))
-	} else if subChunkCount == math.MaxUint32 {
+	case subChunkCount == math.MaxUint32:
 		pk.SubChunkLimit = protocol.Option(int32(-1))
-	} else if io.reading {
+	case io.reading:
 		pk.SubChunkLimit = protocol.Optional[int32]{}
 	}
 	io.Bool(&pk.CacheEnabled)

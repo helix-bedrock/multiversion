@@ -7,8 +7,8 @@ import (
 	_ "embed"
 	"fmt"
 
-	"github.com/helix-bedrock/protocol/nbt"
 	v1001 "github.com/helix-bedrock/multiversion/data/v1001"
+	"github.com/helix-bedrock/protocol/nbt"
 )
 
 var (
@@ -27,22 +27,37 @@ var (
 )
 
 type (
-	BlockState                  = v1001.BlockState
-	ItemEntry                   = v1001.ItemEntry
-	CreativeData                = v1001.CreativeData
-	CraftingData                = v1001.CraftingData
-	PotionData                  = v1001.PotionData
-	CreativeGroup               = v1001.CreativeGroup
-	CreativeItem                = v1001.CreativeItem
-	RecipeBlockState            = v1001.RecipeBlockState
-	RecipeInput                 = v1001.RecipeInput
-	RecipeOutput                = v1001.RecipeOutput
-	ShapedRecipe                = v1001.ShapedRecipe
-	ShapelessRecipe             = v1001.ShapelessRecipe
-	PotionRecipe                = v1001.PotionRecipe
+	// BlockState is the same as in data/v1001: its layout did not change.
+	BlockState = v1001.BlockState
+	// ItemEntry is the same as in data/v1001: its layout did not change.
+	ItemEntry = v1001.ItemEntry
+	// CreativeData is the same as in data/v1001: its layout did not change.
+	CreativeData = v1001.CreativeData
+	// CraftingData is the same as in data/v1001: its layout did not change.
+	CraftingData = v1001.CraftingData
+	// PotionData is the same as in data/v1001: its layout did not change.
+	PotionData = v1001.PotionData
+	// CreativeGroup is the same as in data/v1001: its layout did not change.
+	CreativeGroup = v1001.CreativeGroup
+	// CreativeItem is the same as in data/v1001: its layout did not change.
+	CreativeItem = v1001.CreativeItem
+	// RecipeBlockState is the same as in data/v1001: its layout did not change.
+	RecipeBlockState = v1001.RecipeBlockState
+	// RecipeInput is the same as in data/v1001: its layout did not change.
+	RecipeInput = v1001.RecipeInput
+	// RecipeOutput is the same as in data/v1001: its layout did not change.
+	RecipeOutput = v1001.RecipeOutput
+	// ShapedRecipe is the same as in data/v1001: its layout did not change.
+	ShapedRecipe = v1001.ShapedRecipe
+	// ShapelessRecipe is the same as in data/v1001: its layout did not change.
+	ShapelessRecipe = v1001.ShapelessRecipe
+	// PotionRecipe is the same as in data/v1001: its layout did not change.
+	PotionRecipe = v1001.PotionRecipe
+	// PotionContainerChangeRecipe is the same as in data/v1001: its layout did not change.
 	PotionContainerChangeRecipe = v1001.PotionContainerChangeRecipe
 )
 
+// BlockStates returns the block states of this version, in runtime ID order.
 func BlockStates() ([]BlockState, error) {
 	reader := bytes.NewReader(blockStateData)
 	decoder := nbt.NewDecoder(reader)
@@ -59,6 +74,7 @@ func BlockStates() ([]BlockState, error) {
 	}
 }
 
+// Items returns the item entries of this version.
 func Items() (map[string]ItemEntry, error) {
 	items := map[string]ItemEntry{}
 	if err := nbt.Unmarshal(vanillaItemData, &items); err != nil {
@@ -67,6 +83,7 @@ func Items() (map[string]ItemEntry, error) {
 	return items, nil
 }
 
+// Creative returns the creative inventory of this version.
 func Creative() (CreativeData, error) {
 	var data CreativeData
 	if err := nbt.Unmarshal(creativeItemData, &data); err != nil {
@@ -75,6 +92,7 @@ func Creative() (CreativeData, error) {
 	return data, nil
 }
 
+// Crafting returns the crafting recipes of this version.
 func Crafting() (CraftingData, error) {
 	var data CraftingData
 	if err := nbt.Unmarshal(craftingData, &data); err != nil {
@@ -83,6 +101,7 @@ func Crafting() (CraftingData, error) {
 	return data, nil
 }
 
+// Potions returns the potion recipes of this version.
 func Potions() (PotionData, error) {
 	var data PotionData
 	if err := nbt.Unmarshal(potionData, &data); err != nil {
@@ -91,6 +110,7 @@ func Potions() (PotionData, error) {
 	return data, nil
 }
 
+// RawSnapshot returns the embedded snapshot file with the name passed, byte for byte, and false if there is none.
 func RawSnapshot(name string) ([]byte, bool) {
 	var data []byte
 	switch name {

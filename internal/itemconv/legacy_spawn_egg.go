@@ -3,8 +3,8 @@
 package itemconv
 
 import (
-	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/multiversion/mapping"
+	"github.com/helix-bedrock/protocol"
 )
 
 const (

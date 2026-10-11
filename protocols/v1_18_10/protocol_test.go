@@ -12,10 +12,10 @@ import (
 
 	"github.com/go-gl/mathgl/mgl32"
 	"github.com/google/uuid"
-	"github.com/helix-bedrock/protocol"
-	"github.com/helix-bedrock/protocol/packet"
 	v486data "github.com/helix-bedrock/multiversion/data/v486"
 	"github.com/helix-bedrock/multiversion/mapping"
+	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/packet"
 )
 
 type oracleFixture struct {

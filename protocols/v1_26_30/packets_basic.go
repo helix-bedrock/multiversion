@@ -1,12 +1,13 @@
 package v1_26_30
 
 import (
-	"github.com/helix-bedrock/multiversion/protocols/v1_26_45"
 	"image/color"
 
+	"github.com/helix-bedrock/multiversion/protocols/v1_26_45"
+
+	"github.com/helix-bedrock/multiversion/internal/packetio"
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	"github.com/helix-bedrock/multiversion/internal/packetio"
 )
 
 const (

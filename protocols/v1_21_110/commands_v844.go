@@ -88,7 +88,7 @@ func marshalCommandParameter844(raw protocol.IO, value *protocol.CommandParamete
 		io.Uint32(&value.Type)
 		value.Type = commandArgumentFrom844(io, value.Type)
 	} else {
-		legacyType := commandArgumentTo844(io, value.Type)
+		legacyType := commandArgumentTo844(value.Type)
 		io.Uint32(&legacyType)
 	}
 	io.Bool(&value.Optional)
@@ -105,7 +105,7 @@ func marshalCommandParameter844(raw protocol.IO, value *protocol.CommandParamete
 	}
 }
 
-func commandArgumentTo844(io *wireIO, value uint32) uint32 {
+func commandArgumentTo844(value uint32) uint32 {
 	if value&(protocol.CommandArgEnum|protocol.CommandArgSoftEnum|protocol.CommandArgSuffixed) != 0 {
 		return value
 	}

@@ -4,9 +4,9 @@ import (
 	"image/color"
 
 	"github.com/go-gl/mathgl/mgl32"
+	"github.com/helix-bedrock/multiversion/internal/packetio"
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	"github.com/helix-bedrock/multiversion/internal/packetio"
 )
 
 const (
@@ -126,16 +126,6 @@ func marshalVarRGBA(io protocol.IO, value *color.RGBA) {
 	*value = color.RGBA{R: byte(packed), G: byte(packed >> 8), B: byte(packed >> 16), A: byte(packed >> 24)}
 }
 
-func marshalClientboundUpdateSoundData(io *wireIO, raw packet.Packet) {
-	pk := raw.(*packet.ClientboundUpdateSoundData)
-	io.Uint64(&pk.ServerSoundHandle)
-	event := "Stop"
-	io.String(&event)
-	if io.reading {
-		pk.Stop = protocol.SoundDataUpdate{Type: protocol.SoundDataUpdateStop}
-	}
-}
-
 func marshalClientMovementPredictionSync(io *wireIO, raw packet.Packet) {
 	pk := raw.(*packet.ClientMovementPredictionSync)
 	// EntityDataFlagUsesLegacyFriction was added after protocol 924. Its
@@ -231,18 +221,6 @@ func marshalPlaySound(io *wireIO, raw packet.Packet) {
 	io.Float32(&pk.Pitch)
 	if io.reading {
 		pk.Handle = protocol.Optional[uint64]{}
-	}
-}
-
-func marshalPartyChanged(io *wireIO, raw packet.Packet) {
-	pk := raw.(*packet.PartyChanged)
-	var partyID string
-	if info, ok := pk.PartyInfo.Value(); ok {
-		partyID = info.PartyID
-	}
-	io.String(&partyID)
-	if io.reading {
-		pk.PartyInfo = protocol.Option(packet.PartyInfo{PartyID: partyID})
 	}
 }
 

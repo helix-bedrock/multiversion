@@ -3,10 +3,10 @@ package v1_18_0
 import (
 	"maps"
 
-	"github.com/helix-bedrock/protocol"
-	"github.com/helix-bedrock/protocol/packet"
 	"github.com/helix-bedrock/multiversion/internal/packetconv"
 	"github.com/helix-bedrock/multiversion/mapping"
+	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/packet"
 )
 
 func mapInventoryTransaction(pk *packet.InventoryTransaction, items *mapping.ItemMapper, blocks *mapping.BlockMapper, direction mappingDirection) (*packet.InventoryTransaction, bool) {

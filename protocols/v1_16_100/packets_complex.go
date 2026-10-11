@@ -58,13 +58,3 @@ func marshalLegacyInputFlags(io *wireIO, flags *protocol.InputFlags) {
 		}
 	}
 }
-
-func marshalPlayerBlockAction(io *wireIO, action *protocol.PlayerBlockAction) {
-	io.Varint32(&action.Action)
-	switch action.Action {
-	case protocol.PlayerActionStartBreak, protocol.PlayerActionAbortBreak, protocol.PlayerActionCrackBreak,
-		protocol.PlayerActionPredictDestroyBlock, protocol.PlayerActionContinueDestroyBlock:
-		io.BlockPos(&action.BlockPos)
-		io.Varint32(&action.Face)
-	}
-}

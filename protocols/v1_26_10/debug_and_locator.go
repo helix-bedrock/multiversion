@@ -33,7 +33,7 @@ func marshalDebugDrawer(io *wireIO, raw packet.Packet) {
 		protocol.OptionalFunc(raw, &attached, legacy.Varuint64)
 		if legacy.reading {
 			if value, ok := attached.Value(); ok {
-				if value > uint64(^uint64(0)>>1) {
+				if value > ^uint64(0)>>1 {
 					legacy.InvalidValue(value, "debug drawer attached entity", "exceeds int64")
 					return
 				}

@@ -5,9 +5,9 @@ import (
 
 	"github.com/go-gl/mathgl/mgl32"
 	"github.com/google/uuid"
+	"github.com/helix-bedrock/multiversion/internal/packetconv"
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	"github.com/helix-bedrock/multiversion/internal/packetconv"
 )
 
 func marshalResourcePackStack(io *wireIO, raw packet.Packet) {
@@ -358,21 +358,6 @@ func marshalCameraAimAssistPriorities827(io *wireIO, priorities *protocol.Camera
 	if io.reading {
 		priorities.BlockTags = nil
 		priorities.EntityTypeFamilies = nil
-	}
-}
-
-func marshalCameraAimAssistPreset827(raw protocol.IO, preset *protocol.CameraAimAssistPreset) {
-	io := asWireIO(raw)
-	io.String(&preset.Identifier)
-	protocol.FuncSlice(io.directional(), &preset.BlockExclusions, io.String)
-	protocol.FuncSlice(io.directional(), &preset.LiquidTargets, io.String)
-	protocol.Slice(io.directional(), &preset.ItemSettings)
-	protocol.OptionalFunc(io.directional(), &preset.DefaultItemSettings, io.String)
-	protocol.OptionalFunc(io.directional(), &preset.HandSettings, io.String)
-	if io.reading {
-		preset.EntityExclusions = nil
-		preset.BlockTagExclusions = nil
-		preset.EntityTypeFamilyExclusions = nil
 	}
 }
 

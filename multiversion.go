@@ -3,8 +3,6 @@
 package multiversion
 
 import (
-	"github.com/helix-bedrock/protocol/version"
-	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/multiversion/mapping"
 	"github.com/helix-bedrock/multiversion/protocols/v1_16_100"
 	"github.com/helix-bedrock/multiversion/protocols/v1_18_0"
@@ -20,6 +18,8 @@ import (
 	"github.com/helix-bedrock/multiversion/protocols/v1_26_30"
 	"github.com/helix-bedrock/multiversion/protocols/v1_26_44"
 	"github.com/helix-bedrock/multiversion/protocols/v1_26_45"
+	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/version"
 )
 
 // Protocols returns adapters that need no native registry configuration.
@@ -127,18 +127,22 @@ func V1_18_10WithBlockRegistry(native mapping.BlockRegistry) (version.Protocol, 
 	return v1_18_10.NewWithBlockRegistry(native)
 }
 
+// V1_21_50WithBlockRegistry returns the 1.21.50 adapter with block mapping to the native block registry passed.
 func V1_21_50WithBlockRegistry(native mapping.BlockRegistry) (version.Protocol, error) {
 	return v1_21_50.NewWithBlockRegistry(native)
 }
 
+// V1_21_40WithBlockRegistry returns the 1.21.40 adapter with block mapping to the native block registry passed.
 func V1_21_40WithBlockRegistry(native mapping.BlockRegistry) (version.Protocol, error) {
 	return v1_21_40.NewWithBlockRegistry(native)
 }
 
+// V1_18_0WithBlockRegistry returns the 1.18.0 adapter with block mapping to the native block registry passed.
 func V1_18_0WithBlockRegistry(native mapping.BlockRegistry) (version.Protocol, error) {
 	return v1_18_0.NewWithBlockRegistry(native)
 }
 
+// V1_16_100WithBlockRegistry returns the 1.16.100 adapter with block mapping to the native block registry passed.
 func V1_16_100WithBlockRegistry(native mapping.BlockRegistry) (version.Protocol, error) {
 	return v1_16_100.NewWithBlockRegistry(native)
 }

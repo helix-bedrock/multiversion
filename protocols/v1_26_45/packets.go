@@ -1,9 +1,9 @@
 package v1_26_45
 
 import (
+	"github.com/helix-bedrock/multiversion/internal/packetconv"
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	"github.com/helix-bedrock/multiversion/internal/packetconv"
 )
 
 func marshalBossEvent(io *wireIO, raw packet.Packet) {

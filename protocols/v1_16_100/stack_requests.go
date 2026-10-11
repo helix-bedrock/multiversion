@@ -7,24 +7,6 @@ import (
 	"github.com/helix-bedrock/protocol/packet"
 )
 
-type placeInContainerAction struct {
-	Count               byte
-	Source, Destination protocol.StackRequestSlotInfo
-}
-
-func (a *placeInContainerAction) Marshal(io protocol.IO) {
-	legacy := asWireIO(io)
-	legacy.Uint8(&a.Count)
-	marshalStackRequestSlotInfo(legacy, &a.Source)
-	marshalStackRequestSlotInfo(legacy, &a.Destination)
-}
-
-type takeOutContainerAction placeInContainerAction
-
-func (a *takeOutContainerAction) Marshal(io protocol.IO) {
-	(*placeInContainerAction)(a).Marshal(io)
-}
-
 func marshalItemStackRequestPacket(io *wireIO, raw packet.Packet) {
 	pk := raw.(*packet.ItemStackRequest)
 	protocol.FuncIOSlice(io.directional(), &pk.Requests, func(raw protocol.IO, request *protocol.ItemStackRequest) {

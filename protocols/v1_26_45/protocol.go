@@ -3,16 +3,18 @@
 package v1_26_45
 
 import (
-	"github.com/helix-bedrock/protocol/version"
-	"github.com/helix-bedrock/protocol"
-	"github.com/helix-bedrock/protocol/packet"
 	"github.com/helix-bedrock/multiversion/internal/packetconv"
 	"github.com/helix-bedrock/multiversion/mapping"
+	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/packet"
+	"github.com/helix-bedrock/protocol/version"
 )
 
 const (
-	ID      int32 = 2169
-	Version       = "1.26.45"
+	// ID is the protocol number of this version.
+	ID int32 = 2169
+	// Version is the Minecraft version this adapter speaks.
+	Version = "1.26.45"
 )
 
 // Protocol implements the wire boundary for Minecraft 1.26.45. Registry and
@@ -21,6 +23,7 @@ type Protocol struct {
 	runtime *runtimeData
 }
 
+// MappingReport counts the blocks and items of both registries and lists those that could not be mapped exactly.
 type MappingReport struct {
 	NativeBlocks, TargetBlocks int
 	NativeItems, TargetItems   int
@@ -28,12 +31,15 @@ type MappingReport struct {
 	ItemFallbacks              []mapping.ItemFallback
 }
 
+// New returns the adapter without registries: it converts packets but does not map blocks or items.
 func New() version.Protocol { return &Protocol{} }
 
+// NewWithBlockRegistry returns the adapter with block mapping to the native block registry passed and no item mapping.
 func NewWithBlockRegistry(native mapping.BlockRegistry) (version.Protocol, error) {
 	return NewWithRegistries(native, nil)
 }
 
+// NewWithRegistries returns the adapter with block and item mapping to the native registries passed.
 func NewWithRegistries(native mapping.BlockRegistry, nativeItems []protocol.ItemEntry) (version.Protocol, error) {
 	runtime, err := newRuntimeData(native, nativeItems)
 	if err != nil {

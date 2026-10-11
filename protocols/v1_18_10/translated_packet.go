@@ -24,10 +24,6 @@ func (pk *translatedPacket) Marshal(io protocol.IO) {
 	pk.marshal(asWireIO(io), pk.inner)
 }
 
-func translatedConstructor(constructor func() packet.Packet, marshal packetMarshal) func() packet.Packet {
-	return func() packet.Packet { return &translatedPacket{inner: constructor(), marshal: marshal} }
-}
-
 func translatedConstructorID(constructor func() packet.Packet, marshal packetMarshal, targetID uint32) func() packet.Packet {
 	return func() packet.Packet {
 		return &translatedPacket{inner: constructor(), marshal: marshal, targetID: targetID}

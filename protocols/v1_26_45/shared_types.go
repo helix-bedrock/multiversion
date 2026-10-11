@@ -2,11 +2,12 @@ package v1_26_45
 
 import (
 	"fmt"
+
 	"github.com/helix-bedrock/multiversion/internal/packetio"
 
 	"github.com/go-gl/mathgl/mgl32"
-	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/multiversion/internal/packetconv"
+	"github.com/helix-bedrock/protocol"
 )
 
 func marshalInventoryAction(io *wireIO, action *protocol.InventoryAction) {

@@ -21,17 +21,20 @@ var (
 	biomeDefinitionData []byte
 )
 
+// BlockState is one block state in the protocol 419 snapshot.
 type BlockState struct {
 	Name       string         `nbt:"name"`
 	Properties map[string]any `nbt:"states"`
 	Version    int32          `nbt:"version"`
 }
 
+// ItemEntry is one item in the protocol 419 snapshot.
 type ItemEntry struct {
 	RuntimeID      int16 `json:"runtime_id"`
 	ComponentBased bool  `json:"component_based"`
 }
 
+// BlockStates returns the block states of this version, in runtime ID order.
 func BlockStates() ([]BlockState, error) {
 	reader := bytes.NewReader(blockStateData)
 	decoder := nbt.NewDecoder(reader)
@@ -48,6 +51,7 @@ func BlockStates() ([]BlockState, error) {
 	}
 }
 
+// Items returns the item entries of this version.
 func Items() (map[string]ItemEntry, error) {
 	items := map[string]ItemEntry{}
 	if err := json.Unmarshal(itemRuntimeIDData, &items); err != nil {
@@ -56,6 +60,7 @@ func Items() (map[string]ItemEntry, error) {
 	return items, nil
 }
 
+// BlockItemMetadata returns the item metadata of each block state, indexed by block runtime ID.
 func BlockItemMetadata() ([]int16, error) {
 	var metadata []int16
 	if err := json.Unmarshal(blockItemMetadataData, &metadata); err != nil {
@@ -64,8 +69,10 @@ func BlockItemMetadata() ([]int16, error) {
 	return metadata, nil
 }
 
+// BiomeDefinitions returns the embedded biome definitions of this version as NBT.
 func BiomeDefinitions() []byte { return bytes.Clone(biomeDefinitionData) }
 
+// RawSnapshot returns the embedded snapshot file with the name passed, byte for byte, and false if there is none.
 func RawSnapshot(name string) ([]byte, bool) {
 	var data []byte
 	switch name {

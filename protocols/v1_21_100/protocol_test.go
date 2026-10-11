@@ -357,7 +357,7 @@ func TestHistoricalEntityFlagCount(t *testing.T) {
 
 func TestCommandEnumIndexIsNotArgumentType(t *testing.T) {
 	value := uint32(protocol.CommandArgValid | protocol.CommandArgEnum | 9)
-	if got := commandArgumentTo827(nil, value); got != value {
+	if got := commandArgumentTo827(value); got != value {
 		t.Fatalf("enum index changed during downgrade: got %#x, want %#x", got, value)
 	}
 	if got := commandArgumentFrom827(nil, value); got != value {
@@ -366,10 +366,10 @@ func TestCommandEnumIndexIsNotArgumentType(t *testing.T) {
 }
 
 func TestNewCommandArgumentsUseHistoricalFallbacks(t *testing.T) {
-	if got, want := commandArgumentTo827(nil, protocol.CommandArgValid|protocol.CommandArgTypeStandaloneTarget), uint32(protocol.CommandArgValid|8); got != want {
+	if got, want := commandArgumentTo827(protocol.CommandArgValid|protocol.CommandArgTypeStandaloneTarget), uint32(protocol.CommandArgValid|8); got != want {
 		t.Fatalf("standalone target mapping: got %#x, want %#x", got, want)
 	}
-	if got, want := commandArgumentTo827(nil, protocol.CommandArgValid|999), uint32(protocol.CommandArgValid|4); got != want {
+	if got, want := commandArgumentTo827(protocol.CommandArgValid|999), uint32(protocol.CommandArgValid|4); got != want {
 		t.Fatalf("unknown argument fallback: got %#x, want %#x", got, want)
 	}
 }
@@ -531,14 +531,10 @@ func TestUnsupportedPacketsAreDropped(t *testing.T) {
 	}
 }
 
-func encodeTargetPacket(t *testing.T, pk packet.Packet) []byte {
-	return encodeTargetPacketForDirection(t, pk, false)
-}
-
 func encodeTargetPacketForDirection(t *testing.T, pk packet.Packet, listener bool) []byte {
 	t.Helper()
 	if listener {
-		var target packet.Packet = pk
+		var target = pk
 		if marshal, ok := packetMarshals[pk.ID()]; ok {
 			target = translated(pk, marshal)
 		}

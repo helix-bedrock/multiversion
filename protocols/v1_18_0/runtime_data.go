@@ -6,9 +6,9 @@ import (
 	"sync"
 
 	"github.com/df-mc/worldupgrader/itemupgrader"
-	"github.com/helix-bedrock/protocol"
 	v475 "github.com/helix-bedrock/multiversion/data/v475"
 	"github.com/helix-bedrock/multiversion/mapping"
+	"github.com/helix-bedrock/protocol"
 )
 
 type runtimeData struct {

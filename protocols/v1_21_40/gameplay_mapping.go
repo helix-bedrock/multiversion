@@ -1,12 +1,12 @@
 package v1_21_40
 
 import (
-	"github.com/helix-bedrock/protocol/version"
-	"github.com/helix-bedrock/protocol"
-	"github.com/helix-bedrock/protocol/packet"
 	"github.com/helix-bedrock/multiversion/internal/legacyform"
 	"github.com/helix-bedrock/multiversion/internal/packetconv"
 	"github.com/helix-bedrock/multiversion/mapping"
+	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/packet"
+	"github.com/helix-bedrock/protocol/version"
 )
 
 type mappingDirection uint8
@@ -45,11 +45,7 @@ func (p Protocol) convertGameplayFromLatest(pk packet.Packet, conn version.Sessi
 		if items == nil {
 			return nil
 		}
-		creative, err := p.targetCreativeContent(current, items)
-		if err != nil {
-			return nil
-		}
-		return []packet.Packet{creative}
+		return []packet.Packet{p.targetCreativeContent(current, items)}
 	case *packet.CraftingData:
 		if items == nil {
 			return nil

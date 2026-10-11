@@ -3,7 +3,6 @@ package v1_26_20
 import (
 	"bytes"
 	"encoding/hex"
-	"github.com/helix-bedrock/multiversion/protocols/v1_26_45"
 	"image/color"
 	"os"
 	"os/exec"
@@ -12,6 +11,8 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+
+	"github.com/helix-bedrock/multiversion/protocols/v1_26_45"
 
 	"github.com/go-gl/mathgl/mgl32"
 	"github.com/google/uuid"
@@ -99,7 +100,7 @@ func wireFixtures() []packetFixture {
 		{name: "player_skin", new: func() packet.Packet { return &packet.PlayerSkin{} }},
 		{name: "player_update_entity_overrides", new: func() packet.Packet { return &packet.PlayerUpdateEntityOverrides{} }},
 		{name: "primitive_shapes", new: func() packet.Packet {
-			return &packet.PrimitiveShapes{Shapes: []protocol.PrimitiveShape{{NetworkID: 1, Type: protocol.Option(uint8(protocol.PrimitiveShapeArrow)), ExtraShapeData: &protocol.ArrowShape{ArrowHeadLength: protocol.Option(float32(1))}}}}
+			return &packet.PrimitiveShapes{Shapes: []protocol.PrimitiveShape{{NetworkID: 1, Type: protocol.Option(protocol.PrimitiveShapeArrow), ExtraShapeData: &protocol.ArrowShape{ArrowHeadLength: protocol.Option(float32(1))}}}}
 		}},
 		{name: "resource_pack_client_response", new: func() packet.Packet {
 			return &packet.ResourcePackClientResponse{Response: packet.PackResponseRefused}
@@ -464,8 +465,8 @@ func TestUnsupportedPacketsAreDropped(t *testing.T) {
 
 func TestUnsupportedFieldsAreFilteredWithoutMutation(t *testing.T) {
 	shapes := &packet.PrimitiveShapes{Shapes: []protocol.PrimitiveShape{
-		{NetworkID: 1, Type: protocol.Option(uint8(protocol.PrimitiveShapeArrow)), ExtraShapeData: &protocol.ArrowShape{}},
-		{NetworkID: 2, Type: protocol.Option(uint8(protocol.PrimitiveShapeCylinder)), ExtraShapeData: &protocol.CylinderShape{}},
+		{NetworkID: 1, Type: protocol.Option(protocol.PrimitiveShapeArrow), ExtraShapeData: &protocol.ArrowShape{}},
+		{NetworkID: 2, Type: protocol.Option(protocol.PrimitiveShapeCylinder), ExtraShapeData: &protocol.CylinderShape{}},
 	}}
 	convertedShapes := (Protocol{}).ConvertFromLatest(shapes, nil)
 	if len(convertedShapes) != 1 {

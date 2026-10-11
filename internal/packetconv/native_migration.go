@@ -1,9 +1,10 @@
 package packetconv
 
 import (
+	"strings"
+
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	"strings"
 )
 
 // LegacyStartGame excludes native-only world definitions. Historical clients use

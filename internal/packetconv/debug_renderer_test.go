@@ -10,9 +10,6 @@ import (
 	"testing"
 
 	"github.com/go-gl/mathgl/mgl32"
-	"github.com/helix-bedrock/protocol/version"
-	"github.com/helix-bedrock/protocol"
-	"github.com/helix-bedrock/protocol/packet"
 	"github.com/helix-bedrock/multiversion/protocols/v1_16_100"
 	"github.com/helix-bedrock/multiversion/protocols/v1_18_0"
 	"github.com/helix-bedrock/multiversion/protocols/v1_18_10"
@@ -27,6 +24,9 @@ import (
 	"github.com/helix-bedrock/multiversion/protocols/v1_26_30"
 	"github.com/helix-bedrock/multiversion/protocols/v1_26_44"
 	"github.com/helix-bedrock/multiversion/protocols/v1_26_45"
+	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/packet"
+	"github.com/helix-bedrock/protocol/version"
 )
 
 func debugRendererProtocols() []version.Protocol {
