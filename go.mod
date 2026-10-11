@@ -6,7 +6,7 @@ require (
 	github.com/df-mc/worldupgrader v1.0.22
 	github.com/go-gl/mathgl v1.2.0
 	github.com/google/uuid v1.6.0
-	github.com/helix-bedrock/protocol v0.0.0-20261011210652-40a4c0f9be68
+	github.com/helix-bedrock/protocol v0.0.0-20261011210845-220fb613d69c
 )
 
 require (
