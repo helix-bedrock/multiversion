@@ -3,9 +3,9 @@ package v1_18_10
 import (
 	"math"
 
+	"github.com/helix-bedrock/multiversion/internal/packetio"
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	"github.com/helix-bedrock/multiversion/internal/packetio"
 )
 
 func marshalLevelChunk(io *wireIO, raw packet.Packet) {

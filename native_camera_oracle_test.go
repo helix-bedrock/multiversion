@@ -7,10 +7,10 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/helix-bedrock/protocol/version"
+	multiversion "github.com/helix-bedrock/multiversion"
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	multiversion "github.com/helix-bedrock/multiversion"
+	"github.com/helix-bedrock/protocol/version"
 )
 
 // Independently emitted by each target's locked historical gophertunnel source:

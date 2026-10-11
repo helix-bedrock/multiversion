@@ -1,12 +1,12 @@
 package v1_21_50
 
 import (
+	"github.com/helix-bedrock/multiversion/mapping"
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	"github.com/helix-bedrock/multiversion/mapping"
 )
 
-func (p Protocol) targetCreativeContent(current *packet.CreativeContent, items *mapping.ItemMapper) (*packet.CreativeContent, error) {
+func (p Protocol) targetCreativeContent(current *packet.CreativeContent, items *mapping.ItemMapper) *packet.CreativeContent {
 	creativeItems := make([]protocol.CreativeItem, 0, len(current.Items))
 	for _, item := range current.Items {
 		stack, ok := p.targetCreativeStack(item.Item, items)
@@ -20,7 +20,7 @@ func (p Protocol) targetCreativeContent(current *packet.CreativeContent, items *
 		// native items whenever either list skipped an entry.
 		creativeItems = append(creativeItems, item)
 	}
-	return &packet.CreativeContent{Items: creativeItems}, nil
+	return &packet.CreativeContent{Items: creativeItems}
 }
 
 func (p Protocol) targetCreativeStack(stack protocol.ItemStack, items *mapping.ItemMapper) (protocol.ItemStack, bool) {

@@ -10,15 +10,10 @@ import (
 
 	"github.com/go-gl/mathgl/mgl32"
 	"github.com/google/uuid"
+	"github.com/helix-bedrock/multiversion/mapping"
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	"github.com/helix-bedrock/multiversion/mapping"
 )
-
-type populatedFixture struct {
-	packet packet.Packet
-	hex    string
-}
 
 func TestProtocolIdentityAndCapabilities(t *testing.T) {
 	p := Protocol{}

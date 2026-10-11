@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"image/color"
 
-	"github.com/go-gl/mathgl/mgl32"
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
 )
@@ -33,7 +32,7 @@ func marshalDebugDrawer(io *wireIO, raw packet.Packet) {
 		protocol.OptionalFunc(raw, &attached, legacy.Varuint64)
 		if legacy.reading {
 			if value, ok := attached.Value(); ok {
-				if value > uint64(^uint64(0)>>1) {
+				if value > ^uint64(0)>>1 {
 					legacy.InvalidValue(value, "debug drawer attached entity", "exceeds int64")
 					return
 				}
@@ -100,34 +99,4 @@ func marshalShapeData924(io *wireIO, value *protocol.ShapeData) {
 		return
 	}
 	(*value).Marshal(io.directional())
-}
-
-func marshalLocatorBar(io *wireIO, raw packet.Packet) {
-	pk := raw.(*packet.LocatorBar)
-	protocol.FuncIOSlice(io.directional(), &pk.Waypoints, func(raw protocol.IO, waypoint *protocol.LocatorBarWaypoint) {
-		legacy := asWireIO(raw)
-		legacy.UUID(&waypoint.GroupHandle)
-		marshalWaypoint924(legacy, &waypoint.Waypoint)
-		legacy.Uint8(&waypoint.Action)
-	})
-}
-
-func marshalWaypoint924(io *wireIO, waypoint *protocol.Waypoint) {
-	updateFlag := waypoint.UpdateFlag
-	if !io.reading {
-		updateFlag &^= protocol.WaypointUpdateFlagTextureID
-	}
-	io.Uint32(&updateFlag)
-	protocol.OptionalFunc(io.directional(), &waypoint.Visible, io.Bool)
-	protocol.OptionalMarshaler(io.directional(), &waypoint.WorldPosition)
-	var textureID protocol.Optional[uint32]
-	protocol.OptionalFunc(io.directional(), &textureID, io.Uint32)
-	protocol.OptionalFunc(io.directional(), &waypoint.Colour, io.Int32)
-	protocol.OptionalFunc(io.directional(), &waypoint.ClientPositionAuthority, io.Bool)
-	protocol.OptionalFunc(io.directional(), &waypoint.ActorUniqueID, io.Varint64)
-	if io.reading {
-		waypoint.UpdateFlag = updateFlag &^ protocol.WaypointUpdateFlagTextureID
-		waypoint.TexturePath = protocol.Optional[string]{}
-		waypoint.IconSize = protocol.Optional[mgl32.Vec2]{}
-	}
 }

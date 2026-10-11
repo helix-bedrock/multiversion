@@ -41,7 +41,7 @@ func main() {
 	flag.Parse()
 	if dragonfly == "" || gophertunnel == "" {
 		flag.Usage()
-		os.Exit(2)
+		os.Exit(2) //nolint:forbidigo // a CLI must report failure with its exit code
 	}
 	if err := os.MkdirAll(output, 0o755); err != nil {
 		fatal(err)
@@ -96,5 +96,5 @@ func write(path string, data []byte) {
 
 func fatal(err error) {
 	_, _ = fmt.Fprintln(os.Stderr, err)
-	os.Exit(1)
+	os.Exit(1) //nolint:forbidigo // a CLI must report failure with its exit code
 }

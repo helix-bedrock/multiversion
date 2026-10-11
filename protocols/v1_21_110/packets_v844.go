@@ -5,9 +5,9 @@ import (
 
 	"github.com/go-gl/mathgl/mgl32"
 	"github.com/google/uuid"
+	"github.com/helix-bedrock/multiversion/internal/packetconv"
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	"github.com/helix-bedrock/multiversion/internal/packetconv"
 )
 
 func marshalResourcePackStack(io *wireIO, raw packet.Packet) {

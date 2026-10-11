@@ -142,9 +142,9 @@ func TestChangedPacketRoundTrips(t *testing.T) {
 				HeightMapData: protocol.Option(protocol.HeightMap{}),
 			}}},
 			check: func(t *testing.T, raw packet.Packet) {
-				values, ok := raw.(*packet.SubChunk).SubChunkEntries[0].HeightMapData.Value()
-				if !ok || len(values) != 16 {
-					t.Fatalf("height map: present=%t len=%d", ok, len(values))
+				// HeightMap is a fixed-size array, so only presence can differ.
+				if _, ok := raw.(*packet.SubChunk).SubChunkEntries[0].HeightMapData.Value(); !ok {
+					t.Fatal("height map: not present")
 				}
 			},
 		},

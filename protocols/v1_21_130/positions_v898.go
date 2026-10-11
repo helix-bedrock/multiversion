@@ -2,8 +2,8 @@ package v1_21_130
 
 import (
 	"github.com/go-gl/mathgl/mgl32"
-	"github.com/helix-bedrock/protocol/nbt"
 	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/nbt"
 	"github.com/helix-bedrock/protocol/packet"
 )
 
@@ -165,29 +165,4 @@ func marshalUpdateClientInputLocks(io *wireIO, raw packet.Packet) {
 	io.Varuint32(&pk.Locks)
 	var discardedPosition mgl32.Vec3
 	io.Vec3(&discardedPosition)
-}
-
-func marshalClientBoundDataDrivenUICloseScreen(io *wireIO, raw packet.Packet) {
-	pk := raw.(*packet.ClientBoundDataDrivenUICloseScreen)
-	if io.reading {
-		pk.FormID = protocol.Optional[uint32]{}
-	}
-}
-
-func marshalClientBoundDataDrivenUIShowScreen(io *wireIO, raw packet.Packet) {
-	pk := raw.(*packet.ClientBoundDataDrivenUIShowScreen)
-	io.String(&pk.ScreenID)
-	if io.reading {
-		pk.FormID = 0
-		pk.DataInstanceID = protocol.Optional[uint32]{}
-	}
-}
-
-func marshalVoxelShapes(io *wireIO, raw packet.Packet) {
-	pk := raw.(*packet.VoxelShapes)
-	protocol.Slice(io.directional(), &pk.Shapes)
-	protocol.Slice(io.directional(), &pk.NameMap)
-	if io.reading {
-		pk.CustomShapeCount = 0
-	}
 }

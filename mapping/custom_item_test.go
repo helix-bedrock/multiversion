@@ -1,9 +1,10 @@
 package mapping
 
 import (
-	"github.com/helix-bedrock/protocol"
 	"reflect"
 	"testing"
+
+	"github.com/helix-bedrock/protocol"
 )
 
 func TestCustomItemsDoNotOverwriteVanillaOrAcceptChangedBackendIDs(t *testing.T) {

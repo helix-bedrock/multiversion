@@ -3,9 +3,9 @@ package v1_26_0
 import (
 	"fmt"
 
+	"github.com/helix-bedrock/multiversion/mapping"
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	"github.com/helix-bedrock/multiversion/mapping"
 )
 
 func (p Protocol) targetCreativeContent(current *packet.CreativeContent, items *mapping.ItemMapper) (*packet.CreativeContent, error) {

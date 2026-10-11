@@ -2,18 +2,19 @@ package v1_26_0
 
 import (
 	"fmt"
-	"github.com/helix-bedrock/multiversion/internal/packetio"
-	"github.com/helix-bedrock/multiversion/protocols/v1_26_45"
 	"image/color"
 	"reflect"
 	"sort"
 	"strconv"
 	"strings"
 
+	"github.com/helix-bedrock/multiversion/internal/packetio"
+	"github.com/helix-bedrock/multiversion/protocols/v1_26_45"
+
 	"github.com/go-gl/mathgl/mgl32"
 	"github.com/google/uuid"
-	"github.com/helix-bedrock/protocol/nbt"
 	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/nbt"
 )
 
 func marshalEntityMetadata(io *wireIO, metadata *protocol.EntityMetadata) {

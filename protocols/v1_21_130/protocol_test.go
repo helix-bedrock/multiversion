@@ -89,7 +89,7 @@ func wireFixtures() []packetFixture {
 		{name: "player_skin", new: func() packet.Packet { return &packet.PlayerSkin{} }},
 		{name: "player_update_entity_overrides", new: func() packet.Packet { return &packet.PlayerUpdateEntityOverrides{} }},
 		{name: "primitive_shapes", new: func() packet.Packet {
-			return &packet.PrimitiveShapes{Shapes: []protocol.PrimitiveShape{{NetworkID: 1, Type: protocol.Option(uint8(protocol.PrimitiveShapeArrow)), ExtraShapeData: &protocol.ArrowShape{ArrowHeadLength: protocol.Option(float32(1))}}}}
+			return &packet.PrimitiveShapes{Shapes: []protocol.PrimitiveShape{{NetworkID: 1, Type: protocol.Option(protocol.PrimitiveShapeArrow), ExtraShapeData: &protocol.ArrowShape{ArrowHeadLength: protocol.Option(float32(1))}}}}
 		}},
 		{name: "resource_pack_client_response", new: func() packet.Packet {
 			return &packet.ResourcePackClientResponse{Response: packet.PackResponseRefused}
@@ -322,7 +322,7 @@ func wireFixtures() []packetFixture {
 			}
 		}},
 		{name: "full/primitive_text", new: func() packet.Packet {
-			return &packet.PrimitiveShapes{Shapes: []protocol.PrimitiveShape{{NetworkID: 1, Type: protocol.Option(uint8(protocol.PrimitiveShapeText)), MaxRenderDistance: protocol.Option(float32(64)), ExtraShapeData: &protocol.TextShape{Text: "label", UseRotation: true, DepthTest: true}}}}
+			return &packet.PrimitiveShapes{Shapes: []protocol.PrimitiveShape{{NetworkID: 1, Type: protocol.Option(protocol.PrimitiveShapeText), MaxRenderDistance: protocol.Option(float32(64)), ExtraShapeData: &protocol.TextShape{Text: "label", UseRotation: true, DepthTest: true}}}}
 		}},
 		{name: "full/sub_chunk", new: func() packet.Packet {
 			height := protocol.HeightMap{}
@@ -545,8 +545,8 @@ func TestUnsupportedPacketsAreDropped(t *testing.T) {
 
 func TestUnsupportedFieldsAreFilteredWithoutMutation(t *testing.T) {
 	shapes := &packet.PrimitiveShapes{Shapes: []protocol.PrimitiveShape{
-		{NetworkID: 1, Type: protocol.Option(uint8(protocol.PrimitiveShapeArrow)), ExtraShapeData: &protocol.ArrowShape{}},
-		{NetworkID: 2, Type: protocol.Option(uint8(protocol.PrimitiveShapeCylinder)), ExtraShapeData: &protocol.CylinderShape{}},
+		{NetworkID: 1, Type: protocol.Option(protocol.PrimitiveShapeArrow), ExtraShapeData: &protocol.ArrowShape{}},
+		{NetworkID: 2, Type: protocol.Option(protocol.PrimitiveShapeCylinder), ExtraShapeData: &protocol.CylinderShape{}},
 	}}
 	convertedShapes := (Protocol{}).ConvertFromLatest(shapes, nil)
 	if len(convertedShapes) != 1 {

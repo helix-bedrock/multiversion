@@ -2,18 +2,19 @@ package v1_21_50
 
 import (
 	"fmt"
-	"github.com/helix-bedrock/multiversion/internal/packetio"
-	"github.com/helix-bedrock/multiversion/protocols/v1_26_45"
 	"image/color"
 	"reflect"
 	"sort"
 	"strconv"
 	"strings"
 
+	"github.com/helix-bedrock/multiversion/internal/packetio"
+	"github.com/helix-bedrock/multiversion/protocols/v1_26_45"
+
 	"github.com/go-gl/mathgl/mgl32"
 	"github.com/google/uuid"
-	"github.com/helix-bedrock/protocol/nbt"
 	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/nbt"
 )
 
 func marshalEntityMetadata(io *wireIO, metadata *protocol.EntityMetadata) {
@@ -209,12 +210,6 @@ func marshalPlayerListEntry(io protocol.IO, entry *protocol.PlayerListEntry) {
 	if legacy.reading {
 		entry.PlayerColour = color.RGBA{}
 	}
-}
-
-func marshalLegacyARGB(io protocol.IO, value *color.RGBA) {
-	packed := int32(value.A) | int32(value.R)<<8 | int32(value.G)<<16 | int32(value.B)<<24
-	io.Int32(&packed)
-	*value = color.RGBA{A: byte(packed), R: byte(packed >> 8), G: byte(packed >> 16), B: byte(packed >> 24)}
 }
 
 var personaPieceTypes = [...]string{

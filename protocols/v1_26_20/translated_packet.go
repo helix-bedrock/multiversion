@@ -1,10 +1,10 @@
 package v1_26_20
 
 import (
-	"github.com/helix-bedrock/protocol/version"
+	"github.com/helix-bedrock/multiversion/protocols/v1_26_45"
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	"github.com/helix-bedrock/multiversion/protocols/v1_26_45"
+	"github.com/helix-bedrock/protocol/version"
 )
 
 type packetMarshal func(*wireIO, packet.Packet)

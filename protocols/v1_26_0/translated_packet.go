@@ -1,10 +1,10 @@
 package v1_26_0
 
 import (
-	"github.com/helix-bedrock/protocol/version"
+	"github.com/helix-bedrock/multiversion/protocols/v1_26_45"
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	"github.com/helix-bedrock/multiversion/protocols/v1_26_45"
+	"github.com/helix-bedrock/protocol/version"
 )
 
 type packetMarshal func(*wireIO, packet.Packet)
@@ -137,22 +137,6 @@ func downgradePacket(pk packet.Packet, conn version.Session) []packet.Packet {
 func isLegacyShapeData(value protocol.ShapeData) bool {
 	switch value.(type) {
 	case *protocol.LastShape, *protocol.ArrowShape, *protocol.TextShape, *protocol.BoxShape, *protocol.LineShape, *protocol.SphereShape:
-		return true
-	default:
-		return false
-	}
-}
-
-func isLegacyDataStoreValue(value protocol.DataStorePropertyValue) bool {
-	switch value.Type {
-	case protocol.DataStorePropertyTypeNone, protocol.DataStorePropertyTypeBool, protocol.DataStorePropertyTypeInt64, protocol.DataStorePropertyTypeString:
-		return true
-	case protocol.DataStorePropertyTypeMap:
-		for _, entry := range value.MapValue {
-			if !isLegacyDataStoreValue(entry.Value) {
-				return false
-			}
-		}
 		return true
 	default:
 		return false

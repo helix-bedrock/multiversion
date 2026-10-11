@@ -1,3 +1,5 @@
+// Package mapping maps block states, items and biomes between a version and
+// the native registries.
 package mapping
 
 // Pre12650Biome maps the newly introduced Dappled Forest (195) to Forest (4).

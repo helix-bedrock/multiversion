@@ -5,8 +5,8 @@ import (
 	"sort"
 
 	"github.com/go-gl/mathgl/mgl32"
-	"github.com/helix-bedrock/protocol/nbt"
 	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/nbt"
 	"github.com/helix-bedrock/protocol/packet"
 )
 

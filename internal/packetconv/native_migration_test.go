@@ -1,9 +1,10 @@
 package packetconv
 
 import (
+	"testing"
+
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	"testing"
 )
 
 func TestLegacySoundUsesEffectiveNativeOperation(t *testing.T) {

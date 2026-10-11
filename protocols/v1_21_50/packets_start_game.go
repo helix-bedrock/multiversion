@@ -1,8 +1,8 @@
 package v1_21_50
 
 import (
-	"github.com/helix-bedrock/protocol/nbt"
 	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/nbt"
 	"github.com/helix-bedrock/protocol/packet"
 )
 
@@ -118,39 +118,4 @@ func marshalStartGame(io *wireIO, raw packet.Packet) {
 		pk.AllowAnonymousBlockDropsInEditorWorlds = false
 		pk.ServerJoinInformation = protocol.Optional[protocol.ServerJoinInformation]{}
 	}
-}
-
-func marshalServerJoinInformation(io *wireIO, info *protocol.ServerJoinInformation) {
-	protocol.OptionalFunc(io.directional(), &info.GatheringJoinInfo, func(join *protocol.GatheringJoinInfo) {
-		io.UUID(&join.ExperienceID)
-		io.String(&join.ExperienceName)
-		worldID, _ := join.ExperienceWorldID.Value()
-		io.UUID(&worldID)
-		join.ExperienceWorldID = protocol.Option(worldID)
-		worldName, _ := join.ExperienceWorldName.Value()
-		io.String(&worldName)
-		join.ExperienceWorldName = protocol.Option(worldName)
-		io.String(&join.CreatorID)
-		targetID, _ := join.TargetID.Value()
-		io.UUID(&targetID)
-		join.TargetID = protocol.Option(targetID)
-		scenarioID, _ := join.ScenarioID.Value()
-		io.String(&scenarioID)
-		join.ScenarioID = protocol.Option(scenarioID)
-		serverID, _ := join.ServerID.Value()
-		io.String(&serverID)
-		join.ServerID = protocol.Option(serverID)
-	})
-	protocol.OptionalFunc(io.directional(), &info.StoreEntryPointInfo, func(store *protocol.StoreEntryPointInfo) {
-		io.String(&store.StoreID)
-		io.String(&store.StoreName)
-	})
-	protocol.OptionalFunc(io.directional(), &info.PresenceInfo, func(presence *protocol.PresenceInfo) {
-		var experienceName, worldName protocol.Optional[string]
-		protocol.OptionalFunc(io.directional(), &experienceName, io.String)
-		protocol.OptionalFunc(io.directional(), &worldName, io.String)
-		richPresenceID, _ := presence.RichPresenceID.Value()
-		io.String(&richPresenceID)
-		presence.RichPresenceID = protocol.Option(richPresenceID)
-	})
 }

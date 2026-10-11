@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/helix-bedrock/protocol"
 	v2169 "github.com/helix-bedrock/multiversion/data/v2169"
 	"github.com/helix-bedrock/multiversion/mapping"
+	"github.com/helix-bedrock/protocol"
 )
 
 type runtimeData struct {

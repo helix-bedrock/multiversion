@@ -3,8 +3,8 @@ package v1_16_100
 import (
 	"fmt"
 
-	"github.com/helix-bedrock/protocol/nbt"
 	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/nbt"
 )
 
 const (
@@ -92,10 +92,6 @@ func marshalItemDescriptorCount(io *wireIO, value *protocol.ItemDescriptorCount)
 func marshalItemInstance(io *wireIO, value *protocol.ItemInstance) {
 	io.Varint32(&value.StackNetworkID)
 	marshalItem(io, &value.Stack)
-}
-
-func marshalItemInstanceNew(io *wireIO, value *protocol.ItemInstance) {
-	marshalItemInstance(io, value)
 }
 
 func marshalItem(io *wireIO, value *protocol.ItemStack) {
@@ -190,7 +186,8 @@ func marshalItemUserData(io *wireIO, stack *protocol.ItemStack) {
 		marker = -1
 	}
 	io.Int16(&marker)
-	if marker == -1 {
+	switch {
+	case marker == -1:
 		version := uint8(1)
 		io.Uint8(&version)
 		if version != 1 {
@@ -198,9 +195,9 @@ func marshalItemUserData(io *wireIO, stack *protocol.ItemStack) {
 			return
 		}
 		io.NBT(&stack.NBTData, nbt.NetworkLittleEndian)
-	} else if marker > 0 {
+	case marker > 0:
 		io.NBT(&stack.NBTData, nbt.LittleEndian)
-	} else if io.reading {
+	case io.reading:
 		stack.NBTData = nil
 	}
 	marshalItemStringSlice(io, &stack.CanBePlacedOn)

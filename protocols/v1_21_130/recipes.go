@@ -3,10 +3,10 @@ package v1_21_130
 import (
 	"fmt"
 
-	"github.com/helix-bedrock/protocol"
-	"github.com/helix-bedrock/protocol/packet"
 	v898 "github.com/helix-bedrock/multiversion/data/v898"
 	"github.com/helix-bedrock/multiversion/mapping"
+	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/packet"
 )
 
 const (

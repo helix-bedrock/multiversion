@@ -1,3 +1,5 @@
+// Package packetconv converts packets and types shared by several version
+// adapters.
 package packetconv
 
 import (

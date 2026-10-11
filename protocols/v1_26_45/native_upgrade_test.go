@@ -7,9 +7,9 @@ import (
 	"testing"
 
 	"github.com/go-gl/mathgl/mgl32"
+	"github.com/helix-bedrock/multiversion/mapping"
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	"github.com/helix-bedrock/multiversion/mapping"
 )
 
 func TestStackRequestMapsAfterReadingTheTargetRuntimeID(t *testing.T) {

@@ -3,8 +3,8 @@ package v1_16_100
 import (
 	"testing"
 
-	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/multiversion/mapping"
+	"github.com/helix-bedrock/protocol"
 )
 
 func TestIronGolemSpawnEggUsesLegacyVariant(t *testing.T) {

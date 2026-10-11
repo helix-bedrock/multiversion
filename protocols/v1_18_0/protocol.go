@@ -5,26 +5,31 @@ package v1_18_0
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/helix-bedrock/multiversion/internal/packetconv"
 	"sort"
 
-	"github.com/helix-bedrock/protocol/version"
-	"github.com/helix-bedrock/protocol"
-	"github.com/helix-bedrock/protocol/packet"
+	"github.com/helix-bedrock/multiversion/internal/packetconv"
+
 	"github.com/helix-bedrock/multiversion/mapping"
 	v975 "github.com/helix-bedrock/multiversion/protocols/v1_26_20"
+	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/packet"
+	"github.com/helix-bedrock/protocol/version"
 )
 
 const (
-	ID      int32 = 475
-	Version       = "1.18.2"
+	// ID is the protocol number of this version.
+	ID int32 = 475
+	// Version is the Minecraft version this adapter speaks.
+	Version = "1.18.2"
 )
 
+// Protocol is the adapter for this version. It implements version.Protocol.
 type Protocol struct {
 	base    version.Protocol
 	runtime *runtimeData
 }
 
+// MappingReport counts the blocks and items of both registries and lists those that could not be mapped exactly.
 type MappingReport struct {
 	NativeBlocks, TargetBlocks int
 	NativeItems, TargetItems   int
@@ -47,12 +52,15 @@ type fallbackBlock struct {
 	TargetRuntimeID uint32             `json:"target_runtime_id"`
 }
 
+// New returns the adapter without registries: it converts packets but does not map blocks or items.
 func New() version.Protocol { return &Protocol{base: v975.New()} }
 
+// NewWithBlockRegistry returns the adapter with block mapping to the native block registry passed and no item mapping.
 func NewWithBlockRegistry(native mapping.BlockRegistry) (version.Protocol, error) {
 	return NewWithRegistries(native, nil)
 }
 
+// NewWithRegistries returns the adapter with block and item mapping to the native registries passed.
 func NewWithRegistries(native mapping.BlockRegistry, nativeItems []protocol.ItemEntry) (version.Protocol, error) {
 	runtime, err := newRuntimeData(native, nativeItems)
 	if err != nil {

@@ -65,6 +65,7 @@ func (m *ItemMapper) ValidateNativeEntries(entries []protocol.ItemEntry) error {
 	return nil
 }
 
+// HasCustomItems reports whether custom (component-based) items are registered.
 func (m *ItemMapper) HasCustomItems() bool { return m != nil && len(m.customNames) != 0 }
 
 // RegistryEntries preserves the distinction between an initial full table and

@@ -1,9 +1,9 @@
 package v1_18_0
 
 import (
+	"github.com/helix-bedrock/multiversion/mapping"
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	"github.com/helix-bedrock/multiversion/mapping"
 )
 
 func mapCraftingData(pk *packet.CraftingData, items *mapping.ItemMapper, blocks *mapping.BlockMapper) *packet.CraftingData {
@@ -58,37 +58,6 @@ func filterUserDataRecipes(recipes []protocol.UserDataShapelessRecipe, items *ma
 			recipe.ShapelessRecipe = mapped[0]
 			result = append(result, recipe)
 		}
-	}
-	return result
-}
-
-func filterSmithingTransformRecipes(recipes []protocol.SmithingTransformRecipe, items *mapping.ItemMapper, blocks *mapping.BlockMapper) []protocol.SmithingTransformRecipe {
-	result := make([]protocol.SmithingTransformRecipe, 0, len(recipes))
-	for _, recipe := range recipes {
-		template, okOne := mapDescriptorCount(recipe.Template, items)
-		base, okTwo := mapDescriptorCount(recipe.Base, items)
-		addition, okThree := mapDescriptorCount(recipe.Addition, items)
-		output, okFour := mapItemStack(recipe.Result, items, blocks, toTarget)
-		if !okOne || !okTwo || !okThree || !okFour {
-			continue
-		}
-		recipe.Template, recipe.Base, recipe.Addition, recipe.Result = template, base, addition, output
-		result = append(result, recipe)
-	}
-	return result
-}
-
-func filterSmithingTrimRecipes(recipes []protocol.SmithingTrimRecipe, items *mapping.ItemMapper) []protocol.SmithingTrimRecipe {
-	result := make([]protocol.SmithingTrimRecipe, 0, len(recipes))
-	for _, recipe := range recipes {
-		template, okOne := mapDescriptorCount(recipe.Template, items)
-		base, okTwo := mapDescriptorCount(recipe.Base, items)
-		addition, okThree := mapDescriptorCount(recipe.Addition, items)
-		if !okOne || !okTwo || !okThree {
-			continue
-		}
-		recipe.Template, recipe.Base, recipe.Addition = template, base, addition
-		result = append(result, recipe)
 	}
 	return result
 }

@@ -3,9 +3,9 @@ package multiversion
 import (
 	"fmt"
 
-	"github.com/helix-bedrock/protocol/version"
-	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/multiversion/mapping"
+	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/version"
 )
 
 // Config selects historical adapters without changing their protocol semantics.

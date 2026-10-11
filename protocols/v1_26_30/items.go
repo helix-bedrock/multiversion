@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/helix-bedrock/protocol/nbt"
 	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/nbt"
 )
 
 const (
@@ -228,7 +228,8 @@ func marshalItemUserData(io *wireIO, stack *protocol.ItemStack, empty bool) {
 		reader := protocol.NewReader(bytes.NewReader(extra), io.ShieldID(), true)
 		var length int16
 		reader.Int16(&length)
-		if length == -1 {
+		switch {
+		case length == -1:
 			var version uint8
 			reader.Uint8(&version)
 			if version != 1 {
@@ -236,9 +237,9 @@ func marshalItemUserData(io *wireIO, stack *protocol.ItemStack, empty bool) {
 				return
 			}
 			reader.NBT(&stack.NBTData, nbt.LittleEndian)
-		} else if length > 0 {
+		case length > 0:
 			reader.NBT(&stack.NBTData, nbt.LittleEndian)
-		} else {
+		default:
 			stack.NBTData = nil
 		}
 		protocol.FuncSliceUint32Length(reader, &stack.CanBePlacedOn, reader.StringUTF)

@@ -222,14 +222,15 @@ func marshalLevelChunk(io *wireIO, raw packet.Packet) {
 	if io.reading {
 		pk.SubChunkCount = subChunkCount
 	}
-	if subChunkCount == math.MaxUint32-1 {
+	switch {
+	case subChunkCount == math.MaxUint32-1:
 		limit, _ := pk.SubChunkLimit.Value()
 		highest := uint16(limit)
 		io.Uint16(&highest)
 		pk.SubChunkLimit = protocol.Option(int32(highest))
-	} else if subChunkCount == math.MaxUint32 {
+	case subChunkCount == math.MaxUint32:
 		pk.SubChunkLimit = protocol.Option(int32(-1))
-	} else if io.reading {
+	case io.reading:
 		pk.SubChunkLimit = protocol.Optional[int32]{}
 	}
 	io.Bool(&pk.CacheEnabled)
@@ -354,26 +355,6 @@ func marshalPlayerBlockAction(io protocol.IO, action *protocol.PlayerBlockAction
 		protocol.PlayerActionPredictDestroyBlock, protocol.PlayerActionContinueDestroyBlock:
 		io.BlockPos(&action.BlockPos)
 		io.Varint32(&action.Face)
-	}
-}
-
-func marshalLegacyInputFlags(io *wireIO, flags *protocol.InputFlags, size int) {
-	bits := protocol.NewBitset(size)
-	if !io.reading {
-		for i := 0; i < size && i < flags.Len(); i++ {
-			if flags.Load(i) {
-				bits.Set(i)
-			}
-		}
-	}
-	io.Bitset(&bits, size)
-	if io.reading {
-		*flags = protocol.NewInputFlags(size)
-		for i := 0; i < size; i++ {
-			if bits.Load(i) {
-				flags.Set(i)
-			}
-		}
 	}
 }
 

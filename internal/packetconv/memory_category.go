@@ -1,4 +1,5 @@
 // Code generated from locked gophertunnel enum snapshots; see source SHAs below.
+
 package packetconv
 
 // Protocol 975: de090aef4b59e3fb05b595cd20821aecff7729f6.

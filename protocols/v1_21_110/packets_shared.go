@@ -50,32 +50,3 @@ func marshalCreativeContent(io *wireIO, raw packet.Packet) {
 func marshalAvailableCommands(io *wireIO, raw packet.Packet) {
 	marshalAvailableCommands844(io, raw.(*packet.AvailableCommands))
 }
-
-func cloneCommands(commands []protocol.Command) []protocol.Command {
-	cloned := make([]protocol.Command, len(commands))
-	copy(cloned, commands)
-	for commandIndex := range cloned {
-		cloned[commandIndex].ChainedSubcommandOffsets = append([]uint32(nil), commands[commandIndex].ChainedSubcommandOffsets...)
-		cloned[commandIndex].Overloads = make([]protocol.CommandOverload, len(commands[commandIndex].Overloads))
-		copy(cloned[commandIndex].Overloads, commands[commandIndex].Overloads)
-		for overloadIndex := range cloned[commandIndex].Overloads {
-			cloned[commandIndex].Overloads[overloadIndex].Parameters = append(
-				[]protocol.CommandParameter(nil), commands[commandIndex].Overloads[overloadIndex].Parameters...,
-			)
-		}
-	}
-	return cloned
-}
-
-func normaliseCommandFloatTypes(pk *packet.AvailableCommands, from, to uint32) {
-	for commandIndex := range pk.Commands {
-		for overloadIndex := range pk.Commands[commandIndex].Overloads {
-			for parameterIndex := range pk.Commands[commandIndex].Overloads[overloadIndex].Parameters {
-				parameter := &pk.Commands[commandIndex].Overloads[overloadIndex].Parameters[parameterIndex]
-				if parameter.Type&0xfffff == from {
-					parameter.Type = parameter.Type&^0xfffff | to
-				}
-			}
-		}
-	}
-}

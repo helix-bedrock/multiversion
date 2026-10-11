@@ -2,8 +2,8 @@ package v1_26_10
 
 import (
 	"github.com/google/uuid"
-	"github.com/helix-bedrock/protocol/nbt"
 	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/nbt"
 	"github.com/helix-bedrock/protocol/packet"
 )
 

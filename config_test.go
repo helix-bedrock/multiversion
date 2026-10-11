@@ -4,8 +4,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/helix-bedrock/protocol/version"
 	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/version"
 )
 
 func TestMinimumProtocolSelection(t *testing.T) {

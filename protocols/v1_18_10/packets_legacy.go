@@ -3,10 +3,10 @@ package v1_18_10
 import (
 	"github.com/go-gl/mathgl/mgl32"
 	"github.com/google/uuid"
-	"github.com/helix-bedrock/protocol/nbt"
-	"github.com/helix-bedrock/protocol"
-	"github.com/helix-bedrock/protocol/packet"
 	"github.com/helix-bedrock/multiversion/internal/packetconv"
+	"github.com/helix-bedrock/protocol"
+	"github.com/helix-bedrock/protocol/nbt"
+	"github.com/helix-bedrock/protocol/packet"
 )
 
 func marshalResourcePackClientResponse(io *wireIO, raw packet.Packet) {

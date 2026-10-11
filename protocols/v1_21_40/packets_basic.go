@@ -4,9 +4,9 @@ import (
 	"image/color"
 
 	"github.com/google/uuid"
+	"github.com/helix-bedrock/multiversion/internal/packetio"
 	"github.com/helix-bedrock/protocol"
 	"github.com/helix-bedrock/protocol/packet"
-	"github.com/helix-bedrock/multiversion/internal/packetio"
 )
 
 const (
@@ -116,16 +116,6 @@ func marshalVarRGBA(io protocol.IO, value *color.RGBA) {
 	packed := uint32(value.R) | uint32(value.G)<<8 | uint32(value.B)<<16 | uint32(value.A)<<24
 	io.Varuint32(&packed)
 	*value = color.RGBA{R: byte(packed), G: byte(packed >> 8), B: byte(packed >> 16), A: byte(packed >> 24)}
-}
-
-func marshalClientboundUpdateSoundData(io *wireIO, raw packet.Packet) {
-	pk := raw.(*packet.ClientboundUpdateSoundData)
-	io.Uint64(&pk.ServerSoundHandle)
-	event := "Stop"
-	io.String(&event)
-	if io.reading {
-		pk.Stop = protocol.SoundDataUpdate{Type: protocol.SoundDataUpdateStop}
-	}
 }
 
 func marshalClientMovementPredictionSync(io *wireIO, raw packet.Packet) {

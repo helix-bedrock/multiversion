@@ -2,6 +2,7 @@ package v1_26_10
 
 import (
 	"fmt"
+
 	"github.com/helix-bedrock/multiversion/internal/packetio"
 
 	"github.com/helix-bedrock/protocol"
