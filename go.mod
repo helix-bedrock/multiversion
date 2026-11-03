@@ -11,7 +11,7 @@ require (
 
 require (
 	github.com/coreos/go-oidc/v3 v3.21.0 // indirect
-	github.com/go-jose/go-jose/v4 v4.1.5 // indirect
+	github.com/go-jose/go-jose/v4 v4.1.6 // indirect
 	github.com/klauspost/compress v1.20.1 // indirect
 	golang.org/x/exp v0.0.0-20261011100332-faecfb24eb49 // indirect
 	golang.org/x/oauth2 v0.36.0 // indirect
