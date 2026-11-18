@@ -6,7 +6,7 @@ protocol.
 
 **Status:** in development
 
-Part of [Helix](https://github.com/helix-bedrock), an open-source Minecraft: Bedrock
+Part of [Helix](https://github.com/helix-bedrock), a source-available Minecraft: Bedrock
 Edition server engine in Go. Each adapter implements
 [`version.Protocol`](https://github.com/helix-bedrock/protocol/tree/main/version)
 from `helix-bedrock/protocol`; pass it to `conn.Config.Protocol`.
@@ -71,4 +71,12 @@ go-multiversion credits:
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+Noncommercial use only: [PolyForm Noncommercial 1.0.0](LICENSE) with Helix's
+[extra permissions](ADDITIONAL-PERMISSIONS.md). Anyone may use it, run servers with it
+(even ones that make money) and sell their own plugins, but nobody may sell Helix or its
+code. Helix's game behaviour is re-engineered from Minecraft's Bedrock Dedicated Server;
+see [NOTICE.md](NOTICE.md). Not an official Minecraft product. Not approved by or
+associated with Mojang or Microsoft.
+
+The initial import from go-multiversion keeps its MIT license; see [CREDITS.md](CREDITS.md)
+and [`licenses/`](licenses).

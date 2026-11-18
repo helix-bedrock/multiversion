@@ -35,7 +35,7 @@ go test -race ./...
 
 1. Data files are byte-exact: their SHA-256 is tested. Never let line endings
    change (see `.gitattributes`).
-2. The original copyright line in `LICENSE` stays.
+2. The original MIT license of the first import stays in `licenses/`, and `CREDITS.md` keeps listing it.
 3. Never panic (see the org rules). Invalid packets set the reader's error.
 
 ## Rules kept from go-multiversion
