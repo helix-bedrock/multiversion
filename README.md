@@ -1,5 +1,7 @@
 # multiversion
 
+[![Discord](https://img.shields.io/discord/1568071670097518763?label=discord&logo=discord&logoColor=white&color=5865F2)](https://discord.gg/Fbmc69Gqr7)
+
 Older Minecraft: Bedrock Edition versions for Helix: one adapter per version
 that converts packets, blocks, items, recipes and chunks to and from the latest
 protocol.
